@@ -4,16 +4,14 @@ Smart Guardian Egypt works out of the box with simulated data and local
 storage. These are the only external services involved, what is already
 done, and what needs your own account/console steps.
 
-## 1. Firebase Authentication (REQUIRED for sign-in) - already wired
+## 1. Firebase Authentication (REQUIRED for sign-in) - DONE
 
-The app ships with the web Firebase config in `lib/services/firebase_options.dart`
-(public client config, not a secret). Email/password sign-in, sign-up and
-password reset are implemented.
-
-You must do once, in the Firebase console (free Spark plan):
-1. Open the project.
-2. Authentication > Sign-in method > enable **Email/Password**.
-3. Add your users, or let them create accounts from the app.
+Project `smart-guardian-egypt` was created and **Email/Password sign-in is
+already enabled**. The app ships with the project's Android app config in
+`lib/services/firebase_options.dart` (public client identifiers, not
+secrets). Email/password sign-in, sign-up and password reset are
+implemented and ready. Users can create accounts from the app; you can
+also add users in the Firebase console.
 
 ## 2. OpenStreetMap tiles (free, no key) - no setup needed
 
