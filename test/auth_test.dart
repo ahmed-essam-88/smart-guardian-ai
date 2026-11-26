@@ -49,13 +49,13 @@ void main() {
     expect(authErrorMessage('invalid-credential'), 'Wrong email or password.');
     expect(authErrorMessage('weak-password'), contains('6 characters'));
     expect(authErrorMessage('operation-not-allowed'), contains('not enabled'));
-    expect(authErrorMessage('something-else'),
-        'Sign-in failed. Please try again.');
+    expect(authErrorMessage('something-else'), 'Sign-in failed. Please try again.');
   });
 
   testWidgets('sign in with valid input calls the auth api', (tester) async {
     final auth = FakeAuth();
-    await tester.pumpWidget(_app('en', LoginScreen(auth: auth)));
+    await tester.pumpWidget(
+        _app('en', LoginScreen(auth: auth)));
     await tester.enterText(find.byType(TextField).at(0), 'a@b.com');
     await tester.enterText(find.byType(TextField).at(1), 'secret1');
     await tester.tap(find.widgetWithText(FilledButton, 'Sign in'));
@@ -65,7 +65,8 @@ void main() {
 
   testWidgets('validates email and password before calling', (tester) async {
     final auth = FakeAuth();
-    await tester.pumpWidget(_app('en', LoginScreen(auth: auth)));
+    await tester.pumpWidget(
+        _app('en', LoginScreen(auth: auth)));
     await tester.enterText(find.byType(TextField).at(0), 'nope');
     await tester.tap(find.widgetWithText(FilledButton, 'Sign in'));
     await tester.pump();

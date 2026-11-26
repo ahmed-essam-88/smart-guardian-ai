@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
-/// SMART GUARDIAN EGYPT design system.
-/// Deep navy base, primary blue + electric cyan accents, clear status colors.
+/// SMART GUARDIAN AI design system.
+/// Dark navy / deep black base, electric blue accents, neon status colors.
 class AppColors {
   AppColors._();
 
-  static const Color background = Color(0xFF071426);
-  static const Color surface = Color(0xFF0B1D32);
-  static const Color surfaceAlt = Color(0xFF10243B);
-  static const Color cardBorder = Color(0xFF1E3252);
+  static const Color background = Color(0xFF05070D);
+  static const Color surface = Color(0xFF0B1120);
+  static const Color surfaceAlt = Color(0xFF101A2E);
+  static const Color cardBorder = Color(0xFF1B2A45);
 
-  static const Color electricBlue = Color(0xFF1677FF);
-  static const Color electricBlueDim = Color(0xFF0E4DA8);
-  static const Color cyan = Color(0xFF00D4FF);
+  static const Color electricBlue = Color(0xFF2D9CFF);
+  static const Color electricBlueDim = Color(0xFF1B5FA8);
+  static const Color cyan = Color(0xFF35E0FF);
 
-  static const Color safe = Color(0xFF16C784); // green
-  static const Color medium = Color(0xFFFACC15); // yellow
-  static const Color high = Color(0xFFF97316); // orange
-  static const Color critical = Color(0xFFEF4444); // red
+  static const Color safe = Color(0xFF2BE080); // neon green
+  static const Color medium = Color(0xFFF5D13C); // yellow
+  static const Color high = Color(0xFFFF8A2D); // orange
+  static const Color critical = Color(0xFFFF3B3B); // red
 
-  static const Color textPrimary = Color(0xFFFFFFFF);
-  static const Color textSecondary = Color(0xFFA9BDD2);
-  static const Color textMuted = Color(0xFF5F748F);
+  static const Color textPrimary = Color(0xFFEAF2FF);
+  static const Color textSecondary = Color(0xFF8FA3C4);
+  static const Color textMuted = Color(0xFF5A6B8C);
 
   static Color forRiskLevel(String level) {
     switch (level) {
@@ -44,13 +44,13 @@ class AppGradients {
   static const LinearGradient backgroundGlow = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [Color(0xFF0B1D32), Color(0xFF071426)],
+    colors: [Color(0xFF0A1224), Color(0xFF05070D)],
   );
 
   static const LinearGradient accent = LinearGradient(
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
-    colors: [Color(0xFF1677FF), Color(0xFF00D4FF)],
+    colors: [Color(0xFF2D9CFF), Color(0xFF35E0FF)],
   );
 
   static LinearGradient card = LinearGradient(

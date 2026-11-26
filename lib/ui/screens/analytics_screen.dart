@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import '../../core/theme.dart';
 import '../../data/app_database.dart';
 import '../../data/models.dart';
-import '../../services/report_service.dart';
 import '../widgets/gradient_card.dart';
 
 enum AnalyticsRange { today, week, month }
@@ -23,21 +22,9 @@ class AnalyticsScreen extends StatefulWidget {
 class _AnalyticsScreenState extends State<AnalyticsScreen> {
   AnalyticsRange _range = AnalyticsRange.today;
   List<SensorReading> _readings = [];
-  List<AlertRecord> _alerts = [];
   Map<String, Object?> _stats = const {};
   int _alertCount = 0;
   bool _loading = true;
-
-  String get _rangeLabel {
-    switch (_range) {
-      case AnalyticsRange.today:
-        return 'Today';
-      case AnalyticsRange.week:
-        return 'Last 7 days';
-      case AnalyticsRange.month:
-        return 'Last 30 days';
-    }
-  }
 
   @override
   void initState() {
@@ -67,9 +54,9 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
     if (mounted) {
       setState(() {
         _readings = readings;
-        _alerts = alerts.where((a) => a.timestamp.isAfter(cutoff)).toList();
         _stats = stats;
-        _alertCount = _alerts.length;
+        _alertCount =
+            alerts.where((a) => a.timestamp.isAfter(cutoff)).length;
         _loading = false;
       });
     }
@@ -94,30 +81,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
                 _load();
               },
             ),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: _readings.isEmpty
-                        ? null
-                        : () => ReportService.shareMonitoringReport(
-                              rangeLabel: _rangeLabel,
-                              readings: _readings,
-                              alerts: _alerts,
-                            ),
-                    icon: const Icon(Icons.picture_as_pdf_outlined, size: 17),
-                    label: Text(tr(context, 'Export PDF report'),
-                        style: const TextStyle(fontSize: 12)),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: AppColors.electricBlue,
-                      side: const BorderSide(color: AppColors.electricBlueDim),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
             if (_loading)
               const Padding(
                 padding: EdgeInsets.all(40),
@@ -248,12 +212,8 @@ class _StatsRow extends StatelessWidget {
       crossAxisSpacing: 10,
       childAspectRatio: 2.1,
       children: [
-        _StatTile(
-            label: 'Total Readings', value: '$total', icon: Icons.sensors),
-        _StatTile(
-            label: 'Total Alerts',
-            value: '$alertCount',
-            icon: Icons.notifications_active_outlined),
+        _StatTile(label: 'Total Readings', value: '$total', icon: Icons.sensors),
+        _StatTile(label: 'Total Alerts', value: '$alertCount', icon: Icons.notifications_active_outlined),
         _StatTile(
             label: 'Average Risk',
             value: avg == null ? '--' : '${avg.toStringAsFixed(1)}%',
@@ -378,7 +338,8 @@ class _ChartCard extends StatelessWidget {
                               LineTooltipItem(
                                 '${s.y.toStringAsFixed(1)}$unit',
                                 const TextStyle(
-                                    color: AppColors.textPrimary, fontSize: 12),
+                                    color: AppColors.textPrimary,
+                                    fontSize: 12),
                               ),
                           ],
                         ),
@@ -454,7 +415,8 @@ class _ComparisonCard extends StatelessWidget {
                           child: Text(
                             entries[i].$1,
                             style: const TextStyle(
-                                fontSize: 11, color: AppColors.textSecondary),
+                                fontSize: 11,
+                                color: AppColors.textSecondary),
                           ),
                         );
                       },

@@ -6,7 +6,6 @@ import 'account_screen.dart';
 import 'analytics_screen.dart';
 import 'dashboard_screen.dart';
 import 'history_screen.dart';
-import 'map_screen.dart';
 import 'settings_screen.dart';
 
 /// Bottom navigation shell with animated tab transitions.
@@ -22,7 +21,6 @@ class _HomeShellState extends State<HomeShell> {
 
   static const _tabs = [
     DashboardScreen(),
-    MapScreen(),
     AnalyticsScreen(),
     HistoryScreen(),
     SettingsScreen(),
@@ -62,10 +60,6 @@ class _HomeShellState extends State<HomeShell> {
                 icon: const Icon(Icons.dashboard_outlined),
                 activeIcon: const Icon(Icons.dashboard),
                 label: tr(context, 'Home')),
-            BottomNavigationBarItem(
-                icon: const Icon(Icons.map_outlined),
-                activeIcon: const Icon(Icons.map),
-                label: tr(context, 'Map')),
             BottomNavigationBarItem(
                 icon: const Icon(Icons.insights_outlined),
                 activeIcon: const Icon(Icons.insights),

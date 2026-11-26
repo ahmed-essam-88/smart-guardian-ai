@@ -74,10 +74,7 @@ class _ConnectionPanelState extends State<ConnectionPanel> {
                   ),
                 ),
               ),
-              StatusChip(
-                  label: label,
-                  color: color,
-                  pulse: state == BtConnectionState.connected),
+              StatusChip(label: label, color: color, pulse: state == BtConnectionState.connected),
             ],
           ),
           const SizedBox(height: 12),
@@ -96,7 +93,8 @@ class _ConnectionPanelState extends State<ConnectionPanel> {
               padding: const EdgeInsets.only(bottom: 8),
               child: Text(
                 c.lastInvalidDataNotice!,
-                style: const TextStyle(fontSize: 11, color: AppColors.medium),
+                style: const TextStyle(
+                    fontSize: 11, color: AppColors.medium),
               ),
             ),
           Row(
@@ -130,7 +128,8 @@ class _ConnectionPanelState extends State<ConnectionPanel> {
                             child: Text(
                               '${d.name} (${d.address})',
                               style: const TextStyle(
-                                  fontSize: 13, color: AppColors.textPrimary),
+                                  fontSize: 13,
+                                  color: AppColors.textPrimary),
                               overflow: TextOverflow.ellipsis,
                             ),
                           ),
@@ -139,8 +138,8 @@ class _ConnectionPanelState extends State<ConnectionPanel> {
                           ? null
                           : (address) async {
                               if (address == null) return;
-                              final device = _devices
-                                  .firstWhere((d) => d.address == address);
+                              final device = _devices.firstWhere(
+                                  (d) => d.address == address);
                               await c.connectTo(device.address,
                                   name: device.name);
                             },
@@ -152,13 +151,15 @@ class _ConnectionPanelState extends State<ConnectionPanel> {
               IconButton(
                 tooltip: tr(context, 'Refresh devices'),
                 onPressed: _refresh,
-                icon: const Icon(Icons.refresh, color: AppColors.electricBlue),
+                icon: const Icon(Icons.refresh,
+                    color: AppColors.electricBlue),
               ),
               if (state != BtConnectionState.disconnected)
                 IconButton(
                   tooltip: tr(context, 'Disconnect'),
                   onPressed: c.disconnect,
-                  icon: const Icon(Icons.link_off, color: AppColors.critical),
+                  icon: const Icon(Icons.link_off,
+                      color: AppColors.critical),
                 ),
             ],
           ),

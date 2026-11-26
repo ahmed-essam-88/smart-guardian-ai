@@ -14,8 +14,9 @@ String tr(BuildContext context, String s) =>
     isArabicContext(context) ? translateToArabic(s) : s;
 
 extension TrString on String {
-  String tr(BuildContext context) =>
-      isArabicContext(context) ? translateToArabic(this) : this;
+  String tr(BuildContext context) => isArabicContext(context)
+      ? translateToArabic(this)
+      : this;
 }
 
 /// Drop-in Text that translates its string for Arabic.
@@ -95,8 +96,7 @@ final List<(RegExp, String Function(Match))> _rules = [
         'متصل بـ ${x[1]}${x[3] != null ? ' - آخر بيانات ${translateToArabic(x[3]!)}' : ''}'
   ),
   (
-    RegExp(
-        r'^Opens the phone dialer with (\S+)\. The call is never started automatically\.$'),
+    RegExp(r'^Opens the phone dialer with (\S+)\. The call is never started automatically\.$'),
     (x) => 'يفتح الاتصال بالرقم ${x[1]}. لا تبدأ المكالمة تلقائيًا أبدًا.'
   ),
   (RegExp(r'^OPEN DIALER \((.*)\)$'), (x) => 'فتح الاتصال (${x[1]})'),
@@ -211,8 +211,7 @@ const Map<String, String> _ar = {
   'Total Alerts': 'إجمالي التنبيهات',
   'Average Risk': 'متوسط الخطر',
   'Highest Risk': 'أعلى خطر',
-  'No data for this sensor in range':
-      'لا توجد بيانات لهذا الحساس في هذه الفترة',
+  'No data for this sensor in range': 'لا توجد بيانات لهذا الحساس في هذه الفترة',
   'No readings in this range yet': 'لا توجد قراءات في هذه الفترة بعد',
   'Charts appear here once the app records sensor readings. Enable Demo Mode to generate sample data.':
       'تظهر الرسوم هنا عندما يسجل التطبيق قراءات الحساسات. فعّل الوضع التجريبي لإنشاء بيانات تجريبية.',
@@ -274,40 +273,9 @@ const Map<String, String> _ar = {
   'Simulated readings, clearly marked DEMO everywhere':
       'قراءات محاكاة، مكتوب عليها "تجريبي" في كل مكان',
   'Simulated condition': 'الحالة المحاكاة',
-  'Simulated scenario': 'السيناريو المحاكى',
-  'Normal conditions': 'ظروف طبيعية',
-  'Elevated temperature': 'حرارة مرتفعة',
-  'Smoke warning': 'تحذير دخان',
-  'Gas warning': 'تحذير غاز',
-  'High risk conditions': 'ظروف عالية الخطورة',
-  'Emergency simulation': 'محاكاة طوارئ',
-  'Test scenario only - no real emergency services are contacted.':
-      'سيناريو اختباري فقط - لا يتم الاتصال بأي خدمات طوارئ حقيقية.',
-  // Onboarding / reports
-  'Welcome to Smart Guardian Egypt': 'مرحبًا بك في الحارس الذكي مصر',
-  'Smart safety and environmental monitoring for your buildings, in one place.':
-      'مراقبة ذكية للسلامة والبيئة لمبانيك في مكان واحد.',
-  'Early fire-risk warning': 'إنذار مبكر بخطر الحريق',
-  'Six sensors feed a transparent, rule-based risk engine. Every score comes with a clear explanation - no black boxes.':
-      'ستة حساسات تغذي محرك خطر شفاف قائم على قواعد. كل نتيجة تأتي بشرح واضح - بلا صناديق سوداء.',
-  'Try it now, connect hardware later': 'جرّبه الآن وصِل الأجهزة لاحقًا',
-  'Demo Mode simulates realistic scenarios, always clearly labeled as simulated. ESP32 sensors can feed live data over Bluetooth when you are ready.':
-      'الوضع التجريبي يحاكي سيناريوهات واقعية، موسومة دائمًا كمحاكاة. يمكن لحساسات ESP32 تزويد بيانات حية عبر البلوتوث عندما تكون جاهزًا.',
-  'Smart Guardian Egypt supplements - never replaces - certified fire alarms and emergency services.':
-      'الحارس الذكي مصر يكمل - ولا يغني أبدًا عن - أجهزة إنذار الحريق المعتمدة وخدمات الطوارئ.',
-  'Get started': 'ابدأ',
-  'Next': 'التالي',
-  'Export PDF report': 'تصدير تقرير PDF',
-  // Smart Map
-  'Map': 'الخريطة',
-  'SMART MAP': 'الخريطة الذكية',
-  'DEMO LOCATIONS': 'مواقع تجريبية',
-  'Device': 'جهاز',
-  'devices': 'أجهزة',
-  'This site mirrors the live dashboard risk level. Run a Demo Mode scenario to watch it change.':
-      'هذا الموقع يعكس مستوى الخطر المباشر في لوحة التحكم. شغّل سيناريو تجريبيًا لتراه يتغير.',
-  'DEMO LOCATION - sample site, not a real monitored building. No real emergencies are reported.':
-      'موقع تجريبي - موقع افتراضي وليس مبنى حقيقيًا تحت المراقبة. لا يتم الإبلاغ عن أي طوارئ حقيقية.',
+  'Normal': 'طبيعية',
+  'Elevated': 'مرتفعة',
+  'Fire emergency': 'حريق طارئ',
   'Emergency assistance': 'مساعدة الطوارئ',
   'Emergency number (default: 180 Egypt fire)':
       'رقم الطوارئ (الافتراضي: 180 مطافي مصر)',
@@ -330,16 +298,15 @@ const Map<String, String> _ar = {
       'سيتم استرجاع كل الإعدادات (الحدود، رقم الطوارئ، رسالة الاستغاثة، المفاتيح، الوضع التجريبي) إلى الافتراضي، وقطع البلوتوث، وحذف كل القراءات والتنبيهات. لا يمكن التراجع.',
   'Reset': 'إعادة ضبط',
   'App reset to defaults.': 'تمت إعادة ضبط التطبيق.',
-  'About Smart Guardian Egypt': 'عن الحارس الذكي مصر',
-  'Version 1.1.0\nIntelligence That Protects. Technology That Builds the Future.\nSmart safety and environmental monitoring platform.\n\nThe current risk engine is rule-based with configurable demonstration thresholds. Machine-learning risk classification is planned as a future upgrade and is not active in this version.\n\nThis app is a supplementary monitoring tool. It is not a replacement for certified smoke alarms, certified fire detection systems, or professional emergency services.':
-      'الإصدار 1.1.0\nذكاء يحمي. تكنولوجيا تبني المستقبل.\nمنصة ذكية لمراقبة السلامة والبيئة.\n\nمحرك الخطر الحالي قائم على قواعد بحدود تجريبية قابلة للضبط. التصنيف بالتعلم الآلي مخطط كتطوير مستقبلي وغير مفعّل في هذا الإصدار.\n\nهذا التطبيق أداة مراقبة مساعدة، ولا يغني عن أجهزة إنذار الدخان المعتمدة ولا أنظمة كشف الحريق المعتمدة ولا خدمات الطوارئ.',
+  'About Smart Guardian AI': 'عن الحارس الذكي',
+  'Version 1.0.0\nIntelligent Fire Risk Monitoring & Early Warning System.\n\nThe current risk engine is rule-based with configurable demonstration thresholds. Machine-learning risk classification is planned as a future upgrade and is not active in this version.\n\nThis app is a supplementary monitoring tool. It is not a replacement for certified smoke alarms, certified fire detection systems, or professional emergency services.':
+      'الإصدار 1.0.0\nنظام ذكي لمراقبة خطر الحريق والإنذار المبكر.\n\nمحرك الخطر الحالي قائم على قواعد بحدود تجريبية قابلة للضبط. التصنيف بالتعلم الآلي مخطط كتطوير مستقبلي وغير مفعّل في هذا الإصدار.\n\nهذا التطبيق أداة مراقبة مساعدة، ولا يغني عن أجهزة إنذار الدخان المعتمدة ولا أنظمة كشف الحريق المعتمدة ولا خدمات الطوارئ.',
   // Account / login
   'My account': 'حسابي',
   'MY ACCOUNT': 'حسابي',
   'Signed in as': 'مسجل الدخول باسم',
   'Sign out?': 'تسجيل الخروج؟',
-  'You will need to sign in again to use the app.':
-      'ستحتاج إلى تسجيل الدخول مرة أخرى لاستخدام التطبيق.',
+  'You will need to sign in again to use the app.': 'ستحتاج إلى تسجيل الدخول مرة أخرى لاستخدام التطبيق.',
   'Account': 'الحساب',
   'Sign out': 'تسجيل الخروج',
   'Sign in': 'تسجيل الدخول',
@@ -350,26 +317,18 @@ const Map<String, String> _ar = {
   'Email': 'البريد الإلكتروني',
   'Password': 'كلمة المرور',
   'The email address is not valid.': 'البريد الإلكتروني غير صالح.',
-  'Password must be at least 6 characters.':
-      'يجب ألا تقل كلمة المرور عن 6 أحرف.',
-  'Enter your email first, then tap reset.':
-      'اكتب بريدك الإلكتروني أولًا ثم اضغط استعادة.',
-  'Password reset email sent. Check your inbox and spam folder.':
-      'تم إرسال رسالة استعادة كلمة المرور. تحقق من الوارد والبريد المزعج.',
+  'Password must be at least 6 characters.': 'يجب ألا تقل كلمة المرور عن 6 أحرف.',
+  'Enter your email first, then tap reset.': 'اكتب بريدك الإلكتروني أولًا ثم اضغط استعادة.',
+  'Password reset email sent. Check your inbox and spam folder.': 'تم إرسال رسالة استعادة كلمة المرور. تحقق من الوارد والبريد المزعج.',
   'Wrong email or password.': 'البريد الإلكتروني أو كلمة المرور غير صحيحة.',
   'An account already exists with this email.': 'يوجد حساب بهذا البريد بالفعل.',
-  'Password is too weak. Use at least 6 characters.':
-      'كلمة المرور ضعيفة. استخدم 6 أحرف على الأقل.',
-  'No internet connection. Try again when you are online.':
-      'لا يوجد اتصال بالإنترنت. حاول مرة أخرى عند الاتصال.',
-  'Too many attempts. Wait a moment and try again.':
-      'محاولات كثيرة. انتظر قليلًا ثم حاول مرة أخرى.',
+  'Password is too weak. Use at least 6 characters.': 'كلمة المرور ضعيفة. استخدم 6 أحرف على الأقل.',
+  'No internet connection. Try again when you are online.': 'لا يوجد اتصال بالإنترنت. حاول مرة أخرى عند الاتصال.',
+  'Too many attempts. Wait a moment and try again.': 'محاولات كثيرة. انتظر قليلًا ثم حاول مرة أخرى.',
   'This account has been disabled.': 'تم تعطيل هذا الحساب.',
-  'Email/password sign-in is not enabled for this app yet.':
-      'تسجيل الدخول بالبريد وكلمة المرور غير مفعّل لهذا التطبيق بعد.',
+  'Email/password sign-in is not enabled for this app yet.': 'تسجيل الدخول بالبريد وكلمة المرور غير مفعّل لهذا التطبيق بعد.',
   'Sign-in failed. Please try again.': 'فشل تسجيل الدخول. حاول مرة أخرى.',
-  'Sign-in service is unavailable. Check your internet connection and restart the app.':
-      'خدمة تسجيل الدخول غير متاحة. تحقق من الإنترنت وأعد تشغيل التطبيق.',
+  'Sign-in service is unavailable. Check your internet connection and restart the app.': 'خدمة تسجيل الدخول غير متاحة. تحقق من الإنترنت وأعد تشغيل التطبيق.',
   // Emergency screen
   'Could not open the phone dialer.': 'تعذر فتح تطبيق الاتصال.',
   'Write a message first.': 'اكتب رسالة أولًا.',

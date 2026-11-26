@@ -1,22 +1,17 @@
-# SMART GUARDIAN EGYPT
+# SMART GUARDIAN AI
 
-Intelligence That Protects. Technology That Builds the Future.
-
-Smart safety and environmental monitoring platform. Flutter / Dart, Android. Version 1.1.0.
+Intelligent Fire Risk Monitoring & Early Warning System. Flutter / Dart, Android.
 
 This is a supplementary monitoring tool. It is not a replacement for certified smoke alarms, fire detection systems or professional emergency services.
 
 ## What it does
 - Dashboard: circular risk gauge (0-100%), 4 risk levels, six sensor cards, ESP32 connection panel, emergency section.
-- Smart Map: OpenStreetMap (free, no API key) with demo buildings in Alexandria and Cairo, device and alert markers, legend and details. All sites are labeled DEMO LOCATION; the Smouha tower mirrors the live dashboard risk.
-- First-run onboarding (3 pages, shown once), then mandatory sign-in.
-- Analytics can export a PDF monitoring report (summary, risk distribution, recent readings and alerts). History exports CSV.
 - Rule-based risk engine (temperature > 50 C, smoke > 100, gas > 100, flame, +25 each). Thresholds are configurable in Settings. They are demonstration values, not certified fire-safety thresholds, and the score is not a validated probability of fire. Sensors must be calibrated and validated before real use.
 - Flame detection raises an immediate alert regardless of the score. Alerts fire on risk-level changes with a 60 s duplicate-prevention cooldown.
 - Analytics (today / 7 / 30 days): totals, average and highest risk, temperature, smoke and risk charts, sensor comparison, empty states.
 - History: SQLite storage, search, risk filter, newest/oldest, details, delete with confirmation, CSV export.
-- Bluetooth Classic (SPP) with safe parsing of JSON payloads (device id, LIVE/DEMO mode, timestamp validation) and legacy CSV lines. Missing sensor fields stay missing and are never coerced to zero. See docs/ESP32_PROTOCOL.md.
-- Demo Mode: six simulated scenarios (Normal, Elevated temperature, Smoke warning, Gas warning, High risk, Emergency simulation), clearly marked DEMO, stored with source=demo so they never mix with real hardware data. The emergency simulation is a test scenario and never contacts real services.
+- Bluetooth Classic (SPP) with safe CSV parsing. See docs/ESP32_PROTOCOL.md.
+- Demo Mode: simulated readings (Normal / Elevated / Fire), clearly marked DEMO, stored with source=demo so they never mix with real hardware data.
 - Emergency: opens the dialer (never auto-calls), WhatsApp SOS draft you review and send yourself, location only with explicit permission, safety instructions.
 - No trained AI model exists. `FutureAiEngine` in `lib/services/risk_engine.dart` is an empty boundary for a future model. The app shows no AI predictions.
 
@@ -27,7 +22,7 @@ This is a supplementary monitoring tool. It is not a replacement for certified s
     lib/state       MonitorController (ties input, engine, storage, alerts)
     lib/ui          screens and reusable widgets
     android/        native Bluetooth + notification code (MainActivity.kt)
-    tools/make_icon.py  regenerates the Smart Guardian Egypt icon set (shield + flame + circuit + pyramid)
+    tools/make_icon.py  regenerates the icon set
 
 ## Build
     flutter pub get
@@ -41,7 +36,7 @@ Unit tests: `flutter test` (risk engine levels and boundaries, parser, demo tagg
 Manual: Settings > Demo Mode > pick Normal / Elevated / Fire emergency and watch the gauge, alerts, History and Analytics. For hardware, pair FireGuard_ESP32 and connect from the dashboard.
 
 ## Cloud sync
-Not implemented. The database schema is versioned (v2) and records have ids, device ids and timestamps so a sync layer can be added later.
+Not implemented. The database schema is versioned and records have ids and timestamps so a sync layer can be added later.
 
 ## Reset and emergency numbers
 - Settings > Reset app: confirmation dialog, then restores all settings to defaults, disconnects Bluetooth, stops Demo Mode and deletes stored readings and alerts.
@@ -53,4 +48,4 @@ Not implemented. The database schema is versioned (v2) and records have ids, dev
 - WhatsApp SOS can attach a Google Maps link built from the phone's own GPS/network location (Android LocationManager, no API key, no Google services). Permission is requested first; WhatsApp opens with the text prefilled and the user presses send.
 
 ## Login (Firebase Auth)
-Email/password sign-in, sign-up and password reset through Firebase Authentication only (no Firestore/Storage/Analytics). Config: lib/services/firebase_options.dart (public client config, not a secret). Login is required to use the app (no guest mode, by the owner's decision). In the Firebase console: Authentication > Sign-in method > enable Email/Password. See docs/CREDENTIALS.md for everything that needs your own setup.
+Email/password sign-in, sign-up and password reset through Firebase Authentication only (no Firestore/Storage/Analytics). Config: lib/services/firebase_options.dart (public client config, not a secret). Login is required to use the app. In the Firebase console: Authentication > Sign-in method > enable Email/Password.

@@ -124,11 +124,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: const ButtonStyle(
                             visualDensity: VisualDensity.compact),
                         segments: const [
-                          ButtonSegment(value: 'ar', label: m.Text('العربية')),
-                          ButtonSegment(value: 'en', label: m.Text('English')),
+                          ButtonSegment(
+                              value: 'ar', label: m.Text('العربية')),
+                          ButtonSegment(
+                              value: 'en', label: m.Text('English')),
                         ],
                         selected: {widget.language ?? 'en'},
-                        onSelectionChanged: (v) => widget.onLanguage!(v.first),
+                        onSelectionChanged: (v) =>
+                            widget.onLanguage!(v.first),
                       ),
                     ),
                   const SizedBox(height: 12),
@@ -193,8 +196,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               ? const SizedBox(
                                   height: 18,
                                   width: 18,
-                                  child:
-                                      CircularProgressIndicator(strokeWidth: 2))
+                                  child: CircularProgressIndicator(
+                                      strokeWidth: 2))
                               : Text(_signUp ? 'Create account' : 'Sign in'),
                         ),
                         TextButton(

@@ -2,8 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:smart_guardian_ai/data/models.dart';
 import 'package:smart_guardian_ai/services/risk_engine.dart';
 
-SensorReading r(
-        {double t = 25, double s = 10, double g = 10, bool f = false}) =>
+SensorReading r({double t = 25, double s = 10, double g = 10, bool f = false}) =>
     SensorReading(
         timestamp: DateTime(2026),
         temperature: t,

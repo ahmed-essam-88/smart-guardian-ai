@@ -17,8 +17,7 @@ class RiskThresholds {
     this.gasMax = 100,
   });
 
-  RiskThresholds copyWith(
-          {double? tempMax, double? smokeMax, double? gasMax}) =>
+  RiskThresholds copyWith({double? tempMax, double? smokeMax, double? gasMax}) =>
       RiskThresholds(
         tempMax: tempMax ?? this.tempMax,
         smokeMax: smokeMax ?? this.smokeMax,

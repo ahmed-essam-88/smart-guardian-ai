@@ -12,7 +12,7 @@ class AppDatabase {
   static final AppDatabase instance = AppDatabase._();
 
   static const _dbName = 'smart_guardian.db';
-  static const _dbVersion = 2;
+  static const _dbVersion = 1;
 
   Database? _db;
 
@@ -35,7 +35,6 @@ class AppDatabase {
             flame INTEGER NOT NULL DEFAULT 0,
             gas REAL,
             electricity REAL,
-            device_id TEXT,
             source TEXT NOT NULL DEFAULT 'real',
             risk_score REAL,
             risk_level TEXT
@@ -53,12 +52,6 @@ class AppDatabase {
           )
         ''');
         await d.execute('CREATE INDEX idx_alerts_ts ON alerts(ts)');
-      },
-      onUpgrade: (d, oldV, newV) async {
-        if (oldV < 2) {
-          // v2: readings gain the originating ESP32 device id (nullable).
-          await d.execute('ALTER TABLE readings ADD COLUMN device_id TEXT');
-        }
       },
     );
   }
@@ -141,7 +134,8 @@ class AppDatabase {
 
   Future<List<AlertRecord>> getAlerts({int? limit}) async {
     final d = await db;
-    final rows = await d.query('alerts', orderBy: 'ts DESC', limit: limit);
+    final rows =
+        await d.query('alerts', orderBy: 'ts DESC', limit: limit);
     return rows.map(AlertRecord.fromMap).toList();
   }
 

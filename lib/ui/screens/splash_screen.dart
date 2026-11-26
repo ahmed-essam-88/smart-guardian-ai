@@ -2,9 +2,7 @@ import 'package:flutter/material.dart' hide Text;
 import '../../core/l10n.dart';
 
 import '../../core/theme.dart';
-import '../../main.dart';
 import 'auth_gate.dart';
-import 'onboarding_screen.dart';
 
 /// Splash screen: brand mark, app name, subtitle and an elegant loading
 /// animation, then a smooth transition into the dashboard.
@@ -32,9 +30,8 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
     Future.delayed(const Duration(milliseconds: 2400), () {
       if (!mounted) return;
-      final seen = AppScope.of(context).settings.onboardingSeen;
-      Navigator.of(context).pushReplacement(AppTheme.pageRoute(
-          seen ? const AuthGate() : const OnboardingScreen()));
+      Navigator.of(context)
+          .pushReplacement(AppTheme.pageRoute(const AuthGate()));
     });
   }
 
@@ -93,28 +90,22 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                   const SizedBox(height: 28),
                   const Text(
-                    'SMART GUARDIAN EGYPT',
-                    textAlign: TextAlign.center,
+                    'SMART GUARDIAN AI',
                     style: TextStyle(
                       fontFamily: 'Orbitron',
-                      fontSize: 21,
+                      fontSize: 22,
                       fontWeight: FontWeight.w700,
-                      letterSpacing: 3.0,
+                      letterSpacing: 3.2,
                       color: AppColors.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 32),
-                    child: Text(
-                      'Intelligence That Protects. Technology That Builds the Future.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 12.5,
-                        letterSpacing: 0.8,
-                        height: 1.5,
-                        color: AppColors.textSecondary,
-                      ),
+                  const Text(
+                    'Intelligent Fire Risk Monitoring',
+                    style: TextStyle(
+                      fontSize: 13,
+                      letterSpacing: 1.2,
+                      color: AppColors.textSecondary,
                     ),
                   ),
                   const SizedBox(height: 36),
@@ -125,18 +116,9 @@ class _SplashScreenState extends State<SplashScreen>
                       child: const LinearProgressIndicator(
                         minHeight: 3,
                         backgroundColor: AppColors.cardBorder,
-                        valueColor:
-                            AlwaysStoppedAnimation(AppColors.electricBlue),
+                        valueColor: AlwaysStoppedAnimation(
+                            AppColors.electricBlue),
                       ),
-                    ),
-                  ),
-                  const SizedBox(height: 18),
-                  const Text(
-                    'v1.1.0',
-                    style: TextStyle(
-                      fontSize: 11,
-                      letterSpacing: 1.4,
-                      color: AppColors.textMuted,
                     ),
                   ),
                 ],

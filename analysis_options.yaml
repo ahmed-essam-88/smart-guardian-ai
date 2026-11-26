@@ -3,9 +3,6 @@ analyzer:
   errors:
     deprecated_member_use: ignore
     unnecessary_import: ignore
-  exclude:
-    - build/**
-    - android/**
 linter:
   rules:
     avoid_print: false

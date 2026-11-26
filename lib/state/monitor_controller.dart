@@ -110,8 +110,8 @@ class MonitorController extends ChangeNotifier {
     connectedDeviceName = ok ? (name ?? address) : null;
     _pendingReconnectAddress = ok ? address : null;
     if (!ok) {
-      await _logAlert(
-          'CONNECTION', 'WARNING', 'Failed to connect to ${name ?? address}.');
+      await _logAlert('CONNECTION', 'WARNING',
+          'Failed to connect to ${name ?? address}.');
     }
     notifyListeners();
     return ok;
@@ -130,8 +130,8 @@ class MonitorController extends ChangeNotifier {
     _btSub ??= _bt.events().listen((event) async {
       switch (event['event']) {
         case 'line':
-          final reading = BluetoothService.parseSensorLine(
-              (event['data'] ?? '').toString());
+          final reading =
+              BluetoothService.parseCsvLine((event['data'] ?? '').toString());
           if (reading == null) {
             lastInvalidDataNotice =
                 'Ignored invalid sensor data: ${event['data']}';
@@ -204,9 +204,8 @@ class MonitorController extends ChangeNotifier {
     if (a.level != _lastAlertedLevel &&
         a.level != RiskEngine.safe &&
         _cooldownElapsed()) {
-      final severity = a.level == RiskEngine.critical
-          ? 'CRITICAL'
-          : (a.level == RiskEngine.high ? 'HIGH' : 'WARNING');
+      final severity =
+          a.level == RiskEngine.critical ? 'CRITICAL' : (a.level == RiskEngine.high ? 'HIGH' : 'WARNING');
       await _raiseAlert(
         type: 'RISK_LEVEL',
         severity: severity,

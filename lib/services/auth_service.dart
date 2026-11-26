@@ -96,12 +96,13 @@ class FirebaseAuthApi extends AuthApi {
   }
 
   @override
-  Future<void> signIn(String email, String password) => _wrap(() => _auth!
-      .signInWithEmailAndPassword(email: email.trim(), password: password));
+  Future<void> signIn(String email, String password) => _wrap(() =>
+      _auth!.signInWithEmailAndPassword(email: email.trim(), password: password));
 
   @override
-  Future<void> signUp(String email, String password) => _wrap(() => _auth!
-      .createUserWithEmailAndPassword(email: email.trim(), password: password));
+  Future<void> signUp(String email, String password) => _wrap(() =>
+      _auth!.createUserWithEmailAndPassword(
+          email: email.trim(), password: password));
 
   @override
   Future<void> sendPasswordReset(String email) =>

@@ -63,7 +63,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   'Demo Mode is ON - dashboard values are simulated.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 11, color: AppColors.medium.withOpacity(0.9)),
+                      fontSize: 11,
+                      color: AppColors.medium.withOpacity(0.9)),
                 ),
             ],
           );
@@ -97,7 +98,8 @@ class _ProfileCardState extends State<_ProfileCard> {
             controller: _name,
             style: const TextStyle(fontSize: 13.5),
             decoration: _inputDecoration(context, 'Your name'),
-            onChanged: (v) => widget.controller.settings.setUserName(v.trim()),
+            onChanged: (v) =>
+                widget.controller.settings.setUserName(v.trim()),
           ),
         ],
       ),
@@ -308,17 +310,20 @@ class _DemoCard extends StatelessWidget {
             onChanged: (v) => c.setDemoMode(v),
           ),
           if (c.demoActive) ...[
-            const Text('Simulated scenario',
-                style:
-                    TextStyle(fontSize: 12.5, color: AppColors.textSecondary)),
+            const Text('Simulated condition',
+                style: TextStyle(
+                    fontSize: 12.5, color: AppColors.textSecondary)),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
-              runSpacing: 4,
               children: [
-                for (final scenario in DemoScenario.values)
+                for (final (label, scenario) in [
+                  ('Normal', DemoScenario.normal),
+                  ('Elevated', DemoScenario.elevated),
+                  ('Fire emergency', DemoScenario.fire),
+                ])
                   ChoiceChip(
-                    label: Text(demoScenarioLabels[scenario]!),
+                    label: Text(label),
                     selected: c.demoScenario == scenario,
                     onSelected: (_) => c.setDemoScenario(scenario),
                     selectedColor: AppColors.medium.withOpacity(0.2),
@@ -333,13 +338,6 @@ class _DemoCard extends StatelessWidget {
                   ),
               ],
             ),
-            if (c.demoScenario == DemoScenario.emergency) ...[
-              const SizedBox(height: 8),
-              const Text(
-                'Test scenario only - no real emergency services are contacted.',
-                style: TextStyle(fontSize: 11, color: AppColors.medium),
-              ),
-            ],
           ],
         ],
       ),
@@ -356,8 +354,8 @@ class _EmergencyCard extends StatefulWidget {
 }
 
 class _EmergencyCardState extends State<_EmergencyCard> {
-  late final TextEditingController _number =
-      TextEditingController(text: widget.controller.settings.emergencyNumber);
+  late final TextEditingController _number = TextEditingController(
+      text: widget.controller.settings.emergencyNumber);
   late final TextEditingController _sos = TextEditingController(
       text: widget.controller.settings
           .sosMessageFor(widget.controller.languageCode));
@@ -376,8 +374,8 @@ class _EmergencyCardState extends State<_EmergencyCard> {
             controller: _number,
             keyboardType: TextInputType.phone,
             style: const TextStyle(fontSize: 13.5),
-            decoration: _inputDecoration(
-                context, 'Emergency number (default: 180 Egypt fire)'),
+            decoration:
+                _inputDecoration(context, 'Emergency number (default: 180 Egypt fire)'),
             onChanged: (v) => s.setEmergencyNumber(v.trim()),
           ),
           const SizedBox(height: 10),
@@ -437,8 +435,8 @@ class _DataCard extends StatelessWidget {
               const SizedBox(width: 10),
               Expanded(
                 child: OutlinedButton.icon(
-                  onPressed: () =>
-                      _confirmClear(context, 'Delete the alert log?', () async {
+                  onPressed: () => _confirmClear(
+                      context, 'Delete the alert log?', () async {
                     await AppDatabase.instance.clearAlerts();
                   }),
                   icon: const Icon(Icons.notification_important_outlined,
@@ -466,7 +464,8 @@ class _DataCard extends StatelessWidget {
               onPressed: () => Navigator.pop(context, false),
               child: const Text('Cancel')),
           FilledButton(
-            style: FilledButton.styleFrom(backgroundColor: AppColors.critical),
+            style:
+                FilledButton.styleFrom(backgroundColor: AppColors.critical),
             onPressed: () => Navigator.pop(context, true),
             child: const Text('Delete'),
           ),
@@ -490,7 +489,8 @@ class _ResetCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const _CardTitle(icon: Icons.restart_alt_rounded, title: 'Reset app'),
+          const _CardTitle(
+              icon: Icons.restart_alt_rounded, title: 'Reset app'),
           const SizedBox(height: 6),
           const Text(
             'Restore every setting to its default and delete all stored '
@@ -554,13 +554,11 @@ class _AboutCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _CardTitle(
-              icon: Icons.info_outline, title: 'About Smart Guardian Egypt'),
+          _CardTitle(icon: Icons.info_outline, title: 'About Smart Guardian AI'),
           SizedBox(height: 8),
           Text(
-            'Version 1.1.0\n'
-            'Intelligence That Protects. Technology That Builds the Future.\n'
-            'Smart safety and environmental monitoring platform.\n\n'
+            'Version 1.0.0\n'
+            'Intelligent Fire Risk Monitoring & Early Warning System.\n\n'
             'The current risk engine is rule-based with configurable demonstration thresholds. '
             'Machine-learning risk classification is planned as a future upgrade and is not active in this version.\n\n'
             'This app is a supplementary monitoring tool. It is not a replacement for certified smoke alarms, '

@@ -118,7 +118,7 @@ class _Header extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'SMART GUARDIAN EGYPT',
+                  'SMART GUARDIAN AI',
                   style: TextStyle(
                     fontFamily: 'Orbitron',
                     fontWeight: FontWeight.w700,
@@ -168,8 +168,7 @@ class _RiskCard extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 8),
-            Icon(Icons.radar,
-                size: 42, color: AppColors.electricBlue.withOpacity(0.7)),
+            Icon(Icons.radar, size: 42, color: AppColors.electricBlue.withOpacity(0.7)),
             const SizedBox(height: 12),
             const Text(
               'No sensor data yet',
@@ -222,11 +221,13 @@ class _RiskCard extends StatelessWidget {
           if (a.flameAlert) ...[
             const SizedBox(height: 10),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               decoration: BoxDecoration(
                 color: AppColors.critical.withOpacity(0.14),
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: AppColors.critical.withOpacity(0.6)),
+                border: Border.all(
+                    color: AppColors.critical.withOpacity(0.6)),
               ),
               child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -319,7 +320,9 @@ class _SensorGrid extends StatelessWidget {
           title: 'Flame',
           value: r == null ? '--' : (flame ? 'YES' : 'NO'),
           unit: '',
-          status: r == null ? 'NO DATA' : (flame ? 'DETECTED' : 'CLEAR'),
+          status: r == null
+              ? 'NO DATA'
+              : (flame ? 'DETECTED' : 'CLEAR'),
           statusColor: r == null
               ? AppColors.textMuted
               : (flame ? AppColors.critical : AppColors.safe),
@@ -338,7 +341,8 @@ class _SensorGrid extends StatelessWidget {
           value: fmt(r?.electricity, digits: 0),
           unit: 'V',
           status: hasElec ? 'NORMAL' : 'NO DATA',
-          statusColor: hasElec ? AppColors.safe : AppColors.textMuted,
+          statusColor:
+              hasElec ? AppColors.safe : AppColors.textMuted,
         ),
       ],
     );
