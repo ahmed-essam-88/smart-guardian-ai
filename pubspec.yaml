@@ -41,3 +41,6 @@ flutter:
     - family: Orbitron
       fonts:
         - asset: assets/fonts/Orbitron-var.ttf
+
+dependency_overrides:
+  image: 4.5.4
