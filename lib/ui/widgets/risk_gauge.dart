@@ -151,8 +151,7 @@ class _GaugePainter extends CustomPainter {
           startAngle: startAngle,
           endAngle: startAngle + sweepTotal,
           colors: [color.withOpacity(0.55), color],
-          transform:
-              GradientRotation(startAngle - math.pi / 2),
+          transform: GradientRotation(startAngle - math.pi / 2),
         ).createShader(Rect.fromCircle(center: center, radius: radius));
       canvas.drawArc(
         Rect.fromCircle(center: center, radius: radius),

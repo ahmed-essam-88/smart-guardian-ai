@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 
-/// Firebase client configuration for the Smart Guardian AI project.
+/// Firebase client configuration for the Smart Guardian Egypt project.
 ///
 /// These values come from the Firebase web app config. They identify the
 /// project; they are not secrets (access is controlled by Firebase Auth

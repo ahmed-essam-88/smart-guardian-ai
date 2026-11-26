@@ -10,8 +10,8 @@ class _Section {
   final Color color;
   final String titleEn, titleAr;
   final List<String> en, ar;
-  const _Section(this.icon, this.color, this.titleEn, this.titleAr, this.en,
-      this.ar);
+  const _Section(
+      this.icon, this.color, this.titleEn, this.titleAr, this.en, this.ar);
 }
 
 const _sections = <_Section>[

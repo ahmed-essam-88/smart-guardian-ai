@@ -5,7 +5,8 @@ class DeviceLocation {
   final double lon;
   final double accuracyMeters;
   final int ageSeconds;
-  const DeviceLocation(this.lat, this.lon, this.accuracyMeters, this.ageSeconds);
+  const DeviceLocation(
+      this.lat, this.lon, this.accuracyMeters, this.ageSeconds);
 
   /// Free Google Maps link, no API key needed.
   String get mapsUrl =>

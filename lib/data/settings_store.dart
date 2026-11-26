@@ -16,6 +16,7 @@ class SettingsStore {
   static const _kSosMessage = 'sos_message';
   static const _kShareLocation = 'share_location';
   static const _kLanguage = 'language';
+  static const _kOnboardingSeen = 'onboarding_seen';
 
   final SharedPreferences _prefs;
   SettingsStore(this._prefs);
@@ -62,6 +63,7 @@ class SettingsStore {
   String get sosMessage =>
       _prefs.getString(_kSosMessage) ??
       'EMERGENCY: Possible fire detected at my location. Please help.';
+
   /// Saved custom SOS text, or the default in the given language.
   String sosMessageFor(String lang) =>
       _prefs.getString(_kSosMessage) ??
@@ -79,4 +81,8 @@ class SettingsStore {
   /// 'ar', 'en', or null = not chosen yet (English).
   String? get language => _prefs.getString(_kLanguage);
   Future<void> setLanguage(String v) => _prefs.setString(_kLanguage, v);
+
+  /// First-run onboarding is shown once, before sign-in.
+  bool get onboardingSeen => _prefs.getBool(_kOnboardingSeen) ?? false;
+  Future<void> setOnboardingSeen() => _prefs.setBool(_kOnboardingSeen, true);
 }

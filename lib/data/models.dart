@@ -17,6 +17,7 @@ class SensorReading {
   final bool flameDetected;
   final double? gas; // raw sensor value
   final double? electricity; // volts, optional
+  final String? deviceId; // ESP32 device identifier, when known
   final ReadingSource source;
 
   /// Risk results computed at capture time and stored with the record.
@@ -32,6 +33,7 @@ class SensorReading {
     this.flameDetected = false,
     this.gas,
     this.electricity,
+    this.deviceId,
     required this.source,
     this.riskScore,
     this.riskLevel,
@@ -51,6 +53,7 @@ class SensorReading {
         flameDetected: flameDetected,
         gas: gas,
         electricity: electricity,
+        deviceId: deviceId,
         source: source,
         riskScore: riskScore ?? this.riskScore,
         riskLevel: riskLevel ?? this.riskLevel,
@@ -65,6 +68,7 @@ class SensorReading {
         'flame': flameDetected ? 1 : 0,
         'gas': gas,
         'electricity': electricity,
+        'device_id': deviceId,
         'source': source.name,
         'risk_score': riskScore,
         'risk_level': riskLevel,
@@ -80,6 +84,7 @@ class SensorReading {
         flameDetected: (m['flame'] as num? ?? 0) == 1,
         gas: (m['gas'] as num?)?.toDouble(),
         electricity: (m['electricity'] as num?)?.toDouble(),
+        deviceId: m['device_id'] as String?,
         source: sourceFromString(m['source'] as String?),
         riskScore: (m['risk_score'] as num?)?.toDouble(),
         riskLevel: m['risk_level'] as String?,

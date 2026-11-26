@@ -29,15 +29,15 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
     super.didChangeDependencies();
     if (!_init) {
       final c = AppScope.of(context);
-      _msg = TextEditingController(
-          text: c.settings.sosMessageFor(c.languageCode));
+      _msg =
+          TextEditingController(text: c.settings.sosMessageFor(c.languageCode));
       _includeLocation = c.settings.shareLocation;
       _init = true;
     }
   }
 
-  void _snack(String text) => ScaffoldMessenger.of(context)
-      .showSnackBar(SnackBar(content: Text(text)));
+  void _snack(String text) =>
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text)));
 
   Future<void> _dial([String? override]) async {
     final number = override ?? AppScope.of(context).settings.emergencyNumber;
@@ -127,8 +127,8 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                 const Text(
                   'Tap a number to open the dialer with it filled in. '
                   'You press call yourself.',
-                  style: TextStyle(
-                      fontSize: 12, color: AppColors.textSecondary),
+                  style:
+                      TextStyle(fontSize: 12, color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -137,8 +137,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                       child: FilledButton.icon(
                         style: FilledButton.styleFrom(
                             backgroundColor: AppColors.critical,
-                            padding:
-                                const EdgeInsets.symmetric(vertical: 14)),
+                            padding: const EdgeInsets.symmetric(vertical: 14)),
                         onPressed: () => _dial('180'),
                         icon: const Icon(Icons.local_fire_department),
                         label: const Text('Fire 180'),
@@ -149,8 +148,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                       child: FilledButton.icon(
                         style: FilledButton.styleFrom(
                             backgroundColor: AppColors.high,
-                            padding:
-                                const EdgeInsets.symmetric(vertical: 14)),
+                            padding: const EdgeInsets.symmetric(vertical: 14)),
                         onPressed: () => _dial('123'),
                         icon: const Icon(Icons.medical_services),
                         label: const Text('Ambulance 123'),
@@ -192,8 +190,8 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                       style: TextStyle(fontSize: 13)),
                   subtitle: const Text(
                       'Sends a Google Maps link with your GPS position. Asks permission now.',
-                      style: TextStyle(
-                          fontSize: 11, color: AppColors.textMuted)),
+                      style:
+                          TextStyle(fontSize: 11, color: AppColors.textMuted)),
                   value: _includeLocation,
                   activeColor: AppColors.electricBlue,
                   onChanged: (v) => setState(() => _includeLocation = v),
@@ -206,8 +204,7 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                 const SizedBox(height: 4),
                 const Text(
                   'WhatsApp opens with your text. You pick the contact and press send.',
-                  style:
-                      TextStyle(fontSize: 11, color: AppColors.textMuted),
+                  style: TextStyle(fontSize: 11, color: AppColors.textMuted),
                 ),
               ],
             ),
@@ -223,8 +220,8 @@ class _EmergencyScreenState extends State<EmergencyScreen> {
                 const SizedBox(height: 4),
                 const Text(
                   'Quick steps and what to do for fire, gas leaks and electrical hazards, in Arabic and English.',
-                  style: TextStyle(
-                      fontSize: 12, color: AppColors.textSecondary),
+                  style:
+                      TextStyle(fontSize: 12, color: AppColors.textSecondary),
                 ),
                 const SizedBox(height: 10),
                 FilledButton.icon(

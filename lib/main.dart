@@ -40,7 +40,7 @@ class SmartGuardianApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final code = AppScope.of(context).languageCode;
     return MaterialApp(
-      title: 'Smart Guardian AI',
+      title: 'Smart Guardian Egypt',
       locale: Locale(code),
       supportedLocales: const [Locale('en'), Locale('ar')],
       localizationsDelegates: const [

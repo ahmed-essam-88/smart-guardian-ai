@@ -26,8 +26,8 @@ class HistoryScreen extends StatefulWidget {
 
 class _HistoryScreenState extends State<HistoryScreen>
     with SingleTickerProviderStateMixin {
-  late final TabController _tab = TabController(
-      length: 2, vsync: this, initialIndex: widget.initialTab);
+  late final TabController _tab =
+      TabController(length: 2, vsync: this, initialIndex: widget.initialTab);
   final _search = TextEditingController();
   String? _levelFilter;
   bool _newestFirst = true;
@@ -90,7 +90,7 @@ class _HistoryScreenState extends State<HistoryScreen>
         '${dir.path}/smart_guardian_readings_${DateFormat('yyyyMMdd_HHmm').format(DateTime.now())}.csv');
     await file.writeAsString(buf.toString());
     await Share.shareXFiles([XFile(file.path)],
-        subject: 'Smart Guardian AI readings export');
+        subject: 'Smart Guardian Egypt readings export');
   }
 
   Future<void> _deleteReading(SensorReading r) async {
@@ -204,8 +204,8 @@ class _HistoryScreenState extends State<HistoryScreen>
                   selectedColor: AppColors.electricBlue.withOpacity(0.2),
                   side: const BorderSide(color: AppColors.cardBorder),
                   backgroundColor: AppColors.surface,
-                  labelStyle:
-                      const TextStyle(fontSize: 11, color: AppColors.textPrimary),
+                  labelStyle: const TextStyle(
+                      fontSize: 11, color: AppColors.textPrimary),
                 ),
               ),
               for (final level in _levels)
@@ -231,9 +231,7 @@ class _HistoryScreenState extends State<HistoryScreen>
                 ),
               ActionChip(
                 avatar: Icon(
-                  _newestFirst
-                      ? Icons.arrow_downward
-                      : Icons.arrow_upward,
+                  _newestFirst ? Icons.arrow_downward : Icons.arrow_upward,
                   size: 14,
                   color: AppColors.textSecondary,
                 ),
@@ -244,8 +242,8 @@ class _HistoryScreenState extends State<HistoryScreen>
                 },
                 backgroundColor: AppColors.surface,
                 side: const BorderSide(color: AppColors.cardBorder),
-                labelStyle: const TextStyle(
-                    fontSize: 11, color: AppColors.textPrimary),
+                labelStyle:
+                    const TextStyle(fontSize: 11, color: AppColors.textPrimary),
               ),
               const SizedBox(width: 8),
               ActionChip(
@@ -255,8 +253,8 @@ class _HistoryScreenState extends State<HistoryScreen>
                 onPressed: _readings.isEmpty ? null : _exportCsv,
                 backgroundColor: AppColors.surface,
                 side: const BorderSide(color: AppColors.cardBorder),
-                labelStyle: const TextStyle(
-                    fontSize: 11, color: AppColors.textPrimary),
+                labelStyle:
+                    const TextStyle(fontSize: 11, color: AppColors.textPrimary),
               ),
             ],
           ),
@@ -271,14 +269,11 @@ class _HistoryScreenState extends State<HistoryScreen>
                       color: AppColors.electricBlue,
                       backgroundColor: AppColors.surface,
                       child: ListView.builder(
-                        padding:
-                            const EdgeInsets.fromLTRB(16, 4, 16, 16),
+                        padding: const EdgeInsets.fromLTRB(16, 4, 16, 16),
                         itemCount: _readings.length,
-                        itemBuilder: (context, i) =>
-                            _ReadingTile(
+                        itemBuilder: (context, i) => _ReadingTile(
                           reading: _readings[i],
-                          onDelete: () =>
-                              _deleteReading(_readings[i]),
+                          onDelete: () => _deleteReading(_readings[i]),
                         ),
                       ),
                     ),
@@ -328,9 +323,7 @@ class _ReadingTile extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  r.riskScore == null
-                      ? '--'
-                      : r.riskScore!.toStringAsFixed(0),
+                  r.riskScore == null ? '--' : r.riskScore!.toStringAsFixed(0),
                   style: TextStyle(
                     fontFamily: 'Orbitron',
                     fontWeight: FontWeight.w700,
@@ -346,8 +339,7 @@ class _ReadingTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    DateFormat('EEE, MMM d - HH:mm:ss')
-                        .format(r.timestamp),
+                    DateFormat('EEE, MMM d - HH:mm:ss').format(r.timestamp),
                     style: const TextStyle(
                         fontSize: 12.5,
                         fontWeight: FontWeight.w600,
@@ -405,20 +397,36 @@ class _ReadingTile extends StatelessWidget {
         final rows = [
           ('Date', DateFormat('EEEE, MMMM d, yyyy').format(r.timestamp)),
           ('Time', DateFormat('HH:mm:ss').format(r.timestamp)),
-          ('Temperature',
-              r.temperature == null ? '--' : '${r.temperature!.toStringAsFixed(1)} °C'),
-          ('Humidity',
-              r.humidity == null ? '--' : '${r.humidity!.toStringAsFixed(0)} %'),
+          (
+            'Temperature',
+            r.temperature == null
+                ? '--'
+                : '${r.temperature!.toStringAsFixed(1)} °C'
+          ),
+          (
+            'Humidity',
+            r.humidity == null ? '--' : '${r.humidity!.toStringAsFixed(0)} %'
+          ),
           ('Smoke', r.smoke?.toStringAsFixed(0) ?? '--'),
           ('Gas', r.gas?.toStringAsFixed(0) ?? '--'),
           ('Flame', r.flameDetected ? 'Detected' : 'Not detected'),
-          ('Electricity',
-              r.electricity == null ? '--' : '${r.electricity!.toStringAsFixed(1)} V'),
-          ('Risk score',
-              r.riskScore == null ? '--' : '${r.riskScore!.toStringAsFixed(0)}%'),
+          (
+            'Electricity',
+            r.electricity == null
+                ? '--'
+                : '${r.electricity!.toStringAsFixed(1)} V'
+          ),
+          (
+            'Risk score',
+            r.riskScore == null ? '--' : '${r.riskScore!.toStringAsFixed(0)}%'
+          ),
           ('Risk level', r.riskLevel ?? '--'),
-          ('Source',
-              r.source == ReadingSource.demo ? 'Simulated (Demo Mode)' : 'Real hardware'),
+          (
+            'Source',
+            r.source == ReadingSource.demo
+                ? 'Simulated (Demo Mode)'
+                : 'Real hardware'
+          ),
         ];
         return Padding(
           padding: const EdgeInsets.all(20),
@@ -442,8 +450,7 @@ class _ReadingTile extends StatelessWidget {
                       Expanded(
                         child: Text(label,
                             style: const TextStyle(
-                                color: AppColors.textSecondary,
-                                fontSize: 13)),
+                                color: AppColors.textSecondary, fontSize: 13)),
                       ),
                       Text(value,
                           style: const TextStyle(

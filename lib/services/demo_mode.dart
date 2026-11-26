@@ -3,8 +3,27 @@ import 'dart:math';
 import '../data/models.dart';
 
 /// Demo scenarios used by Demo Mode. The user picks what to simulate so all
-/// four risk levels can be exercised without hardware.
-enum DemoScenario { normal, elevated, fire }
+/// four risk levels can be exercised without hardware. The emergency
+/// simulation is a test scenario only; it never contacts real emergency
+/// services.
+enum DemoScenario {
+  normal,
+  elevatedTemp,
+  smokeWarning,
+  gasWarning,
+  highRisk,
+  emergency,
+}
+
+/// Display labels keyed by scenario (English; Arabic via l10n lookup).
+const Map<DemoScenario, String> demoScenarioLabels = {
+  DemoScenario.normal: 'Normal conditions',
+  DemoScenario.elevatedTemp: 'Elevated temperature',
+  DemoScenario.smokeWarning: 'Smoke warning',
+  DemoScenario.gasWarning: 'Gas warning',
+  DemoScenario.highRisk: 'High risk conditions',
+  DemoScenario.emergency: 'Emergency simulation',
+};
 
 /// Generates realistic sample readings for Demo Mode.
 ///
@@ -28,16 +47,48 @@ class DemoDataGenerator {
           flame: false,
           electricity: _jitter(220, 4),
         );
-      case DemoScenario.elevated:
+      case DemoScenario.elevatedTemp:
+        // Only temperature crosses its threshold -> MEDIUM.
         return _reading(
-          temperature: _jitter(56, 4),
-          humidity: _jitter(33, 5).clamp(0, 100),
-          smoke: _jitter(88, 20).clamp(0, double.infinity),
-          gas: _jitter(70, 18).clamp(0, double.infinity),
+          temperature: _jitter(58, 3),
+          humidity: _jitter(36, 5).clamp(0, 100),
+          smoke: _jitter(30, 10).clamp(0, double.infinity),
+          gas: _jitter(22, 8).clamp(0, double.infinity),
           flame: false,
           electricity: _jitter(219, 5),
         );
-      case DemoScenario.fire:
+      case DemoScenario.smokeWarning:
+        // Only smoke crosses its threshold -> MEDIUM.
+        return _reading(
+          temperature: _jitter(30, 3),
+          humidity: _jitter(44, 6).clamp(0, 100),
+          smoke: _jitter(135, 15).clamp(0, double.infinity),
+          gas: _jitter(24, 8).clamp(0, double.infinity),
+          flame: false,
+          electricity: _jitter(220, 4),
+        );
+      case DemoScenario.gasWarning:
+        // Only gas crosses its threshold -> MEDIUM.
+        return _reading(
+          temperature: _jitter(30, 3),
+          humidity: _jitter(45, 6).clamp(0, 100),
+          smoke: _jitter(26, 10).clamp(0, double.infinity),
+          gas: _jitter(135, 15).clamp(0, double.infinity),
+          flame: false,
+          electricity: _jitter(220, 4),
+        );
+      case DemoScenario.highRisk:
+        // Temperature and smoke both high -> HIGH.
+        return _reading(
+          temperature: _jitter(62, 4),
+          humidity: _jitter(28, 5).clamp(0, 100),
+          smoke: _jitter(122, 12).clamp(0, double.infinity),
+          gas: _jitter(45, 12).clamp(0, double.infinity),
+          flame: false,
+          electricity: _jitter(218, 6),
+        );
+      case DemoScenario.emergency:
+        // Full emergency simulation (test only): CRITICAL + flame alerts.
         return _reading(
           temperature: _jitter(74, 8),
           humidity: _jitter(20, 5).clamp(0, 100),
