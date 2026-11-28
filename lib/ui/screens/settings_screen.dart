@@ -566,6 +566,12 @@ class _AboutCard extends StatelessWidget {
             style: TextStyle(
                 fontSize: 12, color: AppColors.textSecondary, height: 1.5),
           ),
+          SizedBox(height: 8),
+          Text(
+            'Developer · المطوّر: احمد عصام محمد توفيق حسن',
+            style: TextStyle(
+                fontSize: 12, color: AppColors.textSecondary, height: 1.5),
+          ),
         ],
       ),
     );
